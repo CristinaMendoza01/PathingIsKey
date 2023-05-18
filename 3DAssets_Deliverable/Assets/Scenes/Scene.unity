@@ -1513,6 +1513,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1440896347}
+    - target: {fileID: 5772948016415836966, guid: aaad7b127d42e2f44829af52899e9c42, type: 3}
+      propertyPath: players.Array.data[0]
+      value: 
+      objectReference: {fileID: 1440896347}
+    - target: {fileID: 5772948016415836966, guid: aaad7b127d42e2f44829af52899e9c42, type: 3}
+      propertyPath: players.Array.data[1]
+      value: 
+      objectReference: {fileID: 1471923275}
+    - target: {fileID: 5772948016415836966, guid: aaad7b127d42e2f44829af52899e9c42, type: 3}
+      propertyPath: players.Array.data[2]
+      value: 
+      objectReference: {fileID: 1865111049}
+    - target: {fileID: 5772948016415836966, guid: aaad7b127d42e2f44829af52899e9c42, type: 3}
+      propertyPath: players.Array.data[3]
+      value: 
+      objectReference: {fileID: 1264190555}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaad7b127d42e2f44829af52899e9c42, type: 3}
 --- !u!1 &332337755
@@ -2606,7 +2622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableTracking: 0
-  numberOfPlayers: 1
+  numberOfPlayers: 2
   enableYAxis: 0
   players:
   - {fileID: 1440896347}
