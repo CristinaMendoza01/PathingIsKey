@@ -6,6 +6,11 @@ TagManager:
   tags:
   - BlendPlane0
   - BlendPlane1
+  - Stone
+  - Bucket
+  - Pickaxe
+  - Water
+  - Lava
   layers:
   - Default
   - TransparentFX

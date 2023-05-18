@@ -34,7 +34,7 @@ public class PluginConnector : MonoBehaviour
     
 
     //attributes for non-tracking input
-    private int playerSelected = 1;
+    public int playerSelected = 1;
     private int trackingDisabledPlayerSpeed = 5;
 
     //attributes for tracking calibration
@@ -451,30 +451,37 @@ public class PluginConnector : MonoBehaviour
     //read inputs form keyboard and move player selected when tracking is diabled
     private void DisabledTrackingPlayerMovement()
     {
+        Vector3 movement = Vector3.zero;
+
         if (Input.GetKey(KeyCode.W))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.forward * Time.deltaTime * trackingDisabledPlayerSpeed);
+            movement += Vector3.forward;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.left * Time.deltaTime * trackingDisabledPlayerSpeed);
+            movement += Vector3.left;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.back * Time.deltaTime * trackingDisabledPlayerSpeed);
+            movement += Vector3.back;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.right * Time.deltaTime * trackingDisabledPlayerSpeed);
+            movement += Vector3.right;
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.up * Time.deltaTime * trackingDisabledPlayerSpeed);
+            movement += Vector3.up;
         }
         if (Input.GetKey(KeyCode.E))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.down * Time.deltaTime * trackingDisabledPlayerSpeed);
+            movement += Vector3.down;
         }
+
+        movement *= Time.deltaTime * trackingDisabledPlayerSpeed;
+        //CHECK IF IT IS VALID FIRST!!!
+        // si (players[playerSelected - 1].transform.position + movement) es valida --> muevete, sino no
+        players[playerSelected - 1].GetComponent<PlayerMovement>().setPosition(players[playerSelected - 1].transform.position + movement);
     }
 
     private void UpdateInterfaceText()
