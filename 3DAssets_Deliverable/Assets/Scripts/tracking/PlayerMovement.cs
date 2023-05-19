@@ -8,15 +8,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isValidpos = true;
 
     [SerializeField] private Vector3 tmppos;
+
+    // Variable to calculate the direction
+    private Vector3 lastPosition;
+    [HideInInspector] public Vector3 direction;
+
     // Start is called before the first frame update
     void Start()
     {
         tmppos = transform.position;
+        lastPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Calculate the direction
+        direction = (transform.position - lastPosition).normalized;
+        lastPosition = transform.position;
         //Debug.Log(isValidpos);
         if(!isValidpos) transform.position = tmppos;
         // transform.position 
