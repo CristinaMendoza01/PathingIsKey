@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         //Calculate the direction
         direction = (transform.position - lastPosition).normalized;
         lastPosition = transform.position;
+        Debug.Log(direction);
         //Debug.Log(isValidpos);
         if(!isValidpos) transform.position = tmppos;
         // transform.position 
@@ -59,16 +60,23 @@ public class PlayerMovement : MonoBehaviour
     // }
 
     void OnTriggerStay(Collider col){
-        if(col.CompareTag("Platform") || col.CompareTag("Platform")){
+        if(col.CompareTag("Platform") || col.CompareTag("Stone")){
             tmppos = transform.position;
             isValidpos = true;
         }
     }
 
     void OnTriggerExit(Collider col){
-        if(col.CompareTag("Stone")){
+        if(col.CompareTag("Platform") || col.CompareTag("Stone")){
             isValidpos = false;
             transform.position = tmppos;
+        }
+    }
+
+    void OnTriggerEnter(Collider col){
+        if(col.CompareTag("Platform") || col.CompareTag("Stone")){
+            isValidpos = true;
+            tmppos = transform.position;
         }
     }
 }

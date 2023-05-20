@@ -9,6 +9,8 @@ public class PickaxeController : MonoBehaviour
     private Vector3 OriginalPos;
     private int tmp_pS;
 
+    private Vector3 direction;
+
     private AudioSource breakStoneAudio;
     public AudioClip breakStoneSound;
 
@@ -24,7 +26,20 @@ public class PickaxeController : MonoBehaviour
     void Update()
     {   
         if(isGrabbed){
-            transform.position = players[tmp_pS -1].transform.position;   
+            transform.position = players[tmp_pS -1].transform.position;
+            direction = players[tmp_pS -1].GetComponent<PlayerMovement>().direction;
+            if(direction.x==0 && direction.z==1){
+                transform.rotation = Quaternion.AngleAxis(90, Vector3.right);
+            }
+            if(direction.x==0 && direction.z==-1){
+                transform.rotation = Quaternion.AngleAxis(90, Vector3.left);
+            }
+            if(direction.x==1 && direction.z==0){
+                transform.rotation = Quaternion.AngleAxis(90, Vector3.back);
+            }
+            if(direction.x==-1 && direction.z==0){
+                transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
+            }
             if(Input.GetKeyDown(KeyCode.R)) {
                 RemoveStone();                
             }
@@ -53,6 +68,5 @@ public class PickaxeController : MonoBehaviour
                 breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);
             }
         }
-
     }
 }
