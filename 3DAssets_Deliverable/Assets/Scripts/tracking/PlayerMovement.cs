@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     // }
 
     void OnTriggerStay(Collider col){
-        if(col.CompareTag("Stone")){
+        if(col.CompareTag("Platform") || col.CompareTag("Platform")){
             tmppos = transform.position;
             isValidpos = true;
         }

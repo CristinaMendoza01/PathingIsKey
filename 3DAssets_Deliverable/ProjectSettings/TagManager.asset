@@ -11,6 +11,7 @@ TagManager:
   - Pickaxe
   - Water
   - Lava
+  - Platform
   layers:
   - Default
   - TransparentFX

@@ -8,21 +8,25 @@ public class PickaxeController : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     private Vector3 OriginalPos;
     private int tmp_pS;
+
+    private AudioSource breakStoneAudio;
+    public AudioClip breakStoneSound;
+
     // Start is called before the first frame update
     void Start()
     {
         OriginalPos = transform.position;
+        breakStoneAudio = GetComponent<AudioSource>(); 
 
     }
 
     // Update is called once per frame
     void Update()
     {   
-        //Debug.Log(isGrabbed);
         if(isGrabbed){
-            transform.position = players[tmp_pS -1].transform.position;
-            if(Input.GetKeyDown(KeyCode.R)){
-                RemoveStone();
+            transform.position = players[tmp_pS -1].transform.position;   
+            if(Input.GetKeyDown(KeyCode.R)) {
+                RemoveStone();                
             }
         }
     }
@@ -31,13 +35,13 @@ public class PickaxeController : MonoBehaviour
         if(col.CompareTag("Player")){
             isGrabbed = true;
             tmp_pS = GameObject.Find("PluginController").GetComponent<PluginConnector>().playerSelected;
-
         }
         if(col.CompareTag("Bucket")){
             isGrabbed = false;
             //transform.position = OriginalPos;
         }
     }
+
     private void RemoveStone(){
         //To detect stone in front of us we use a raycast
         Vector3 playerDirection = players[tmp_pS - 1].GetComponent<PlayerMovement>().direction;
@@ -46,6 +50,7 @@ public class PickaxeController : MonoBehaviour
         if(Physics.Raycast(transform.position, playerDirection, out hit, 2.0f)){
             if (hit.transform.CompareTag("Stone")){
                 Destroy(hit.transform.gameObject);
+                breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);
             }
         }
 
