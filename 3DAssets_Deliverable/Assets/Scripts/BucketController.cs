@@ -11,12 +11,16 @@ public class BucketController : MonoBehaviour
 
     public GameObject WaterBucket;
     public GameObject LavaBucket;
+    
+    private AudioSource fillWaterAudio;
+    public AudioClip fillWaterSound;
     // Start is called before the first frame update
     void Start()
     {
         OriginalPos = transform.position;
         WaterBucket.SetActive(false);
         LavaBucket.SetActive(false);
+        fillWaterAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,6 +46,7 @@ public class BucketController : MonoBehaviour
             //transform.position = OriginalPos;
         }
         if(col.CompareTag("Water")){
+            fillWaterAudio.PlayOneShot(fillWaterSound, 1.0f); 
             WaterBucket.SetActive(true);
             LavaBucket.SetActive(false);
         }
