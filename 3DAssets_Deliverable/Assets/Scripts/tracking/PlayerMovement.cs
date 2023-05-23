@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         //else transform.position = tmppos;
 
         float x = Mathf.Clamp(pos.x, tmppos.x - tmppos_offset.x, tmppos.x + tmppos_offset.x);
-        float y = Mathf.Clamp(pos.y, tmppos.y - tmppos_offset.y, tmppos.y + tmppos_offset.y);
+        float y = Mathf.Clamp(pos.y, -10, 40);
         float z = Mathf.Clamp(pos.z, tmppos.z - tmppos_offset.z, tmppos.z + tmppos_offset.z);
 
         transform.position = new Vector3(x, y, z);

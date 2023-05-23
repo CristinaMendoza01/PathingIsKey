@@ -12,6 +12,7 @@ TagManager:
   - Water
   - Lava
   - Platform
+  - Remover
   layers:
   - Default
   - TransparentFX
