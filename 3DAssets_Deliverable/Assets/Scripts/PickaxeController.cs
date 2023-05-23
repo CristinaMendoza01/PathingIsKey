@@ -17,6 +17,7 @@ public class PickaxeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tmp_pS = -1;
         OriginalPos = transform.position;
         breakStoneAudio = GetComponent<AudioSource>(); 
 
@@ -25,8 +26,9 @@ public class PickaxeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(isGrabbed){
-            transform.position = players[tmp_pS -1].transform.position;
+        if(isGrabbed && tmp_pS != -1)
+        {
+            this.gameObject.transform.position = players[tmp_pS -1].transform.position;
             direction = players[tmp_pS -1].GetComponent<PlayerMovement>().direction;
             if(direction.x==0 && direction.z==1){
                 transform.rotation = Quaternion.AngleAxis(90, Vector3.right);
@@ -49,9 +51,9 @@ public class PickaxeController : MonoBehaviour
     void OnTriggerEnter(Collider col){
         if(col.CompareTag("Player")){
             isGrabbed = true;
-            tmp_pS = GameObject.Find("PluginController").GetComponent<PluginConnector>().playerSelected;
+            tmp_pS = col.gameObject.GetComponent<PlayerMovement>().playerIndex;
         }
-        if(col.CompareTag("Bucket")){
+        if (col.CompareTag("Bucket")){
             isGrabbed = false;
             //transform.position = OriginalPos;
         }

@@ -17,6 +17,7 @@ public class BucketController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tmp_pS = -1;
         OriginalPos = transform.position;
         WaterBucket.SetActive(false);
         LavaBucket.SetActive(false);
@@ -27,15 +28,16 @@ public class BucketController : MonoBehaviour
     void Update()
     {   
         //Debug.Log(isGrabbed);
-        if(isGrabbed){
-            transform.position = players[tmp_pS -1].transform.position;
+        if(isGrabbed && tmp_pS != -1){
+            this.gameObject.transform.position = players[tmp_pS -1].transform.position;
         }
     }
 
     void OnTriggerEnter(Collider col){
         if(col.CompareTag("Player")){
             isGrabbed = true;
-            tmp_pS = GameObject.Find("PluginController").GetComponent<PluginConnector>().playerSelected;
+            tmp_pS = col.gameObject.GetComponent<PlayerMovement>().playerIndex;
+            Debug.Log(tmp_pS);
         }
         if(col.CompareTag("Pickaxe")){
             isGrabbed = false;
