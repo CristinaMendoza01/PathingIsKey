@@ -34,26 +34,22 @@ public class PickaxeController : MonoBehaviour
             this.gameObject.transform.position = players[tmp_pS -1].transform.position;
             lastdir = direction;
             direction = players[tmp_pS -1].GetComponent<PlayerMovement>().direction;
-            dir_angle = Vector3.Angle(lastdir, direction);
-            if(dir_angle != 0){
-                this.transform.Rotate(0, 0, -dir_angle);
+            direction.y = 0;
+            
+            if(direction.magnitude > 0.01f){
+                dir_angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                Quaternion rotation;
+                if(dir_angle != 90 || dir_angle != -90 || dir_angle != 0 || dir_angle != 180 || dir_angle != -180){
+                    rotation = Quaternion.Euler(90f,0f, -dir_angle);
+                }else{
+                    rotation = Quaternion.Euler(90f,0f, dir_angle);
+                }
+                this.transform.rotation = rotation;
             }
-            // if(direction.x==0 && direction.z==1){
-            //     transform.rotation = Quaternion.AngleAxis(90, Vector3.right);
-            // }
-            // if(direction.x==0 && direction.z==-1){
-            //     transform.rotation = Quaternion.AngleAxis(90, Vector3.left);
-            // }
-            // if(direction.x==1 && direction.z==0){
-            //     transform.rotation = Quaternion.AngleAxis(90, Vector3.back);
-            // }
-            // if(direction.x==-1 && direction.z==0){
-            //     transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
-            // }
-            //Debug.Log(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().CanRemove);
-            if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().CanRemove && players[tmp_pS -1].transform.position.y <= -3){
+
+            if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().CanRemove && players[tmp_pS -1].transform.position.y <= 1){
+                if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().stone != null) breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);               
                 Destroy(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().stone);
-                breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);               
             }
         }
     }
@@ -68,17 +64,4 @@ public class PickaxeController : MonoBehaviour
             //transform.position = OriginalPos;
         }
     }
-
-    // private void RemoveStone(){
-    //     //To detect stone in front of us we use a raycast
-    //     Vector3 playerDirection = players[tmp_pS - 1].GetComponent<PlayerMovement>().direction;
-    //     playerDirection = players[tmp_pS - 1].transform.TransformDirection(playerDirection);
-    //     RaycastHit hit;
-    //     if(Physics.Raycast(transform.position, playerDirection, out hit, 2.0f)){
-    //         if (hit.transform.CompareTag("Stone")){
-    //             Destroy(hit.transform.gameObject);
-    //             breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);
-    //         }
-    //     }
-    // }
 }
