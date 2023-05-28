@@ -1,0 +1,6 @@
+{
+  "prettier.useEditorConfig": false,
+  "prettier.printWidth": 160,
+  "editor.suggest.matchOnWordStartOnly": false,
+  "editor.wordWrapColumn": 160
+}
