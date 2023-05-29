@@ -13,6 +13,7 @@ TagManager:
   - Lava
   - Platform
   - Remover
+  - Gem
   layers:
   - Default
   - TransparentFX

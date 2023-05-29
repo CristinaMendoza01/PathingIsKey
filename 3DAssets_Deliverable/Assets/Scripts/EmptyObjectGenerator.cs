@@ -5,6 +5,7 @@ public class EmptyObjectGenerator : MonoBehaviour
     public int numberOfObjectsX; // Número de objetos a generar en el eje X
     public int numberOfObjectsZ; // Número de objetos a generar en el eje Z
     public float separation = 10f; // La separación entre los objetos
+    public GameObject Platform;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class EmptyObjectGenerator : MonoBehaviour
                 Vector3 position = new Vector3(i * separation, 0, j * separation);
                 
                 // Genera un nuevo objeto vacío
-                GameObject newObj = new GameObject($"Object_{i}_{j}");
+                GameObject newObj = Instantiate(Platform);
                 newObj.transform.position = position;
             }
         }
