@@ -8,7 +8,7 @@ public class RemoverController : MonoBehaviour
     public GameObject stone;
 
     void OnTriggerStay(Collider col){
-        Debug.Log(transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed);
+        //Debug.Log(transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed);
         if(col.CompareTag("Stone") && transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed){
             CanRemove = true;
             stone = col.transform.gameObject;

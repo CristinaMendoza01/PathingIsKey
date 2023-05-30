@@ -19,6 +19,7 @@ public class EmptyObjectGenerator : MonoBehaviour
                 // Genera un nuevo objeto vacío
                 GameObject newObj = Instantiate(Platform);
                 newObj.transform.position = position;
+                //if(newObj.transform.GetComponent<PlatformController>().notValidPos) Destroy(newObj);
             }
         }
     }
