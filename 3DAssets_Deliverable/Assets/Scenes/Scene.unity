@@ -675,6 +675,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: StonePlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 7298796525454458811, guid: ea03cbf2e4b5daa48808e0aa26df923d, type: 3}
+      propertyPath: m_Size.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298796525454458811, guid: ea03cbf2e4b5daa48808e0aa26df923d, type: 3}
+      propertyPath: m_Size.y
+      value: 3.0839725
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298796525454458811, guid: ea03cbf2e4b5daa48808e0aa26df923d, type: 3}
+      propertyPath: m_Size.z
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298796525454458811, guid: ea03cbf2e4b5daa48808e0aa26df923d, type: 3}
+      propertyPath: m_Center.y
+      value: 0.29967713
+      objectReference: {fileID: 0}
     - target: {fileID: 8952928053354055856, guid: ea03cbf2e4b5daa48808e0aa26df923d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4241,7 +4257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfObjectsX: 10
-  numberOfObjectsZ: 10
+  numberOfObjectsZ: 9
   separation: 10
   Platform: {fileID: 270902854399841730, guid: bc69210b8b6be4c3195f266fa969ff01, type: 3}
 --- !u!4 &1158663884
@@ -4252,7 +4268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158663882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

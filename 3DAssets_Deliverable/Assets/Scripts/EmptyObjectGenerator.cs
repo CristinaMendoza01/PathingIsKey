@@ -14,7 +14,7 @@ public class EmptyObjectGenerator : MonoBehaviour
             for (int j = 0; j < numberOfObjectsZ; j++)
             {
                 // Calcula la posición del próximo objeto
-                Vector3 position = new Vector3(i * separation, 0, j * separation);
+                Vector3 position = new Vector3((i+1) * separation, 0, (j+1) * separation);
                 
                 // Genera un nuevo objeto vacío
                 GameObject newObj = Instantiate(Platform);

@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
-    private GameObject Stone;
-    private GameObject Obsidian;
-    private GameObject Water;
-    private GameObject Lava;
+    public GameObject Stone;
+    public GameObject Obsidian;
+    public GameObject Water;
+    public GameObject Lava;
 
     public bool notValidPos;
     // Start is called before the first frame update
     void Start()
     {        
-        Stone = this.gameObject.transform.GetChild(0).gameObject;
-        Obsidian = this.gameObject.transform.GetChild(1).gameObject;
-        Lava = this.gameObject.transform.GetChild(2).gameObject;
-        Water = this.gameObject.transform.GetChild(3).gameObject;
+        // Stone = this.gameObject.transform.GetChild(0).transform.gameObject;
+        // Obsidian = this.gameObject.transform.GetChild(1).transform.gameObject;
+        // Lava = this.gameObject.transform.GetChild(2).transform.gameObject;
+        // Water = this.gameObject.transform.GetChild(3).transform.gameObject;
 
-        //Debug.Log(Stone.transform.name);
+        Debug.Log(Stone.transform.name);
         Stone.SetActive(false);
+        Debug.Log(Obsidian.transform.name);
         Obsidian.SetActive(false);
+        Debug.Log(Lava.transform.name);
         Lava.SetActive(false);
+        Debug.Log(Water.transform.name);
         Water.SetActive(false);
 
         notValidPos = false;
@@ -50,6 +53,7 @@ public class PlatformController : MonoBehaviour
                 //AUDIO LAVA
                 break;
             case "Water":
+                //Debug.Log("ININININININ");
                 Water.SetActive(true);
                 //AUDIO WATER
                 break;
@@ -58,9 +62,8 @@ public class PlatformController : MonoBehaviour
     
     void OnTriggerEnter(Collider col){
         if(col.CompareTag("Platform") || col.CompareTag("Stone")){
-                    Debug.Log("aqui"+col.gameObject.name    );
-
-            Destroy(this);
+            //Debug.Log("aqui"+col.gameObject.name);
+            Destroy(this.gameObject);
         }
     }
 }

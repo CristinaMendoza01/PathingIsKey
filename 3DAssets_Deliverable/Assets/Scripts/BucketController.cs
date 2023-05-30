@@ -62,7 +62,7 @@ public class BucketController : MonoBehaviour
         if(col.CompareTag("Empty") && transform.position.y <= 1 && isGrabbed){
             if(CanDropLava){
                 //Mirar si agua activa
-                if(col.gameObject.transform.GetChild(4).gameObject.activeSelf){
+                if(col.gameObject.transform.GetChild(2).gameObject.activeSelf){
                     //SI --> Hacer aparecer obsidiana
                     EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Obsidian");
                 }
@@ -71,6 +71,8 @@ public class BucketController : MonoBehaviour
                     EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Lava");
 
                 }
+                CanDropLava = false;
+                LavaBucket.SetActive(false);
             } 
             if(CanDropWater){
                 //Mirar si lava activa
@@ -79,9 +81,12 @@ public class BucketController : MonoBehaviour
                     EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Stone");
                 }
                 else {
+                    
                     //NO --> Hacer aparecer agua
                     EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Water");
                 }
+                CanDropWater = false;
+                WaterBucket.SetActive(false);
             }
         }
     }
