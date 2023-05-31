@@ -9,7 +9,7 @@ public class RemoverController : MonoBehaviour
 
     void OnTriggerStay(Collider col){
         //Debug.Log(transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed);
-        if(col.CompareTag("Stone") && transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed){
+        if((col.CompareTag("Stone") || col.CompareTag("Obsidian")) && transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed){
             CanRemove = true;
             stone = col.transform.gameObject;
         }
@@ -17,6 +17,4 @@ public class RemoverController : MonoBehaviour
             CanRemove = false;
         }
     }
-    
-    
 }

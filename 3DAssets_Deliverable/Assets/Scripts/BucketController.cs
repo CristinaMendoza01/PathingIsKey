@@ -52,23 +52,30 @@ public class BucketController : MonoBehaviour
             fillWaterAudio.PlayOneShot(fillWaterSound, 1.0f); 
             CanDropWater = true;
             WaterBucket.SetActive(true);
-            LavaBucket.SetActive(false);
+            if(CanDropLava){
+                CanDropLava = false;
+                LavaBucket.SetActive(false);
+            }
         }
         if(col.CompareTag("Lava")){
             CanDropLava = true;
             LavaBucket.SetActive(true);
-            WaterBucket.SetActive(false);
+            if(CanDropWater){
+                CanDropWater = false;
+                WaterBucket.SetActive(false);
+            }
         }
         if(col.CompareTag("Empty") && transform.position.y <= 1 && isGrabbed){
             if(CanDropLava){
                 //Mirar si agua activa
-                if(col.gameObject.transform.GetChild(2).gameObject.activeSelf){
+                Debug.Log(col.gameObject.transform.GetChild(3).gameObject.activeSelf);
+                if(col.gameObject.transform.GetChild(3).gameObject.activeSelf){
                     //SI --> Hacer aparecer obsidiana
-                    EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Obsidian");
+                    col.transform.GetComponent<PlatformController>().UpdatePlatform("Obsidian");
                 }
                 else {
                     //NO --> Hacer aparecer lava
-                    EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Lava");
+                    col.transform.GetComponent<PlatformController>().UpdatePlatform("Lava");
 
                 }
                 CanDropLava = false;
@@ -76,14 +83,16 @@ public class BucketController : MonoBehaviour
             } 
             if(CanDropWater){
                 //Mirar si lava activa
-                if(col.gameObject.transform.GetChild(3).gameObject.activeSelf){
+                Debug.Log(col.gameObject.transform.GetChild(2).gameObject.activeSelf);
+                
+                if(col.gameObject.transform.GetChild(2).gameObject.activeSelf){
                     //SI --> Hacer aparecer piedra
-                    EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Stone");
+                    col.transform.GetComponent<PlatformController>().UpdatePlatform("Stone");
                 }
                 else {
                     
                     //NO --> Hacer aparecer agua
-                    EmptyPlatform.transform.GetComponent<PlatformController>().UpdatePlatform("Water");
+                    col.transform.GetComponent<PlatformController>().UpdatePlatform("Water");
                 }
                 CanDropWater = false;
                 WaterBucket.SetActive(false);
