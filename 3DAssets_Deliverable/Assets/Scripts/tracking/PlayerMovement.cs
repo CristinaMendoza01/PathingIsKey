@@ -13,12 +13,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lastPosition;
     public Vector3 direction;
 
+    private AudioSource pickGemAudio;
+    public AudioClip pickGemSound;
+
     // Start is called before the first frame update
     void Start()
     {
         tmppos = new Vector3(79.5f, 0, 76.8f);
         tmppos_offset = new Vector3(0f, 0, 0f);
         lastPosition = transform.position;
+        pickGemAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +49,12 @@ public class PlayerMovement : MonoBehaviour
             //isValidpos = true;
             tmppos = col.transform.position;
             tmppos_offset = col.transform.localScale * 10 / 2;
+        }
+
+        if(col.CompareTag("Gem"))
+        {
+            col.gameObject.SetActive(false);
+            pickGemAudio.PlayOneShot(pickGemSound, 1.0f); 
         }
     }
 

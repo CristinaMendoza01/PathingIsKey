@@ -18,6 +18,7 @@ TagManager:
   - WaterPlat
   - LavaPlat
   - Obsidian
+  - GemPlatform
   layers:
   - Default
   - TransparentFX
