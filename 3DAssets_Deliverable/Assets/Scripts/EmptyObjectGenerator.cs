@@ -7,8 +7,24 @@ public class EmptyObjectGenerator : MonoBehaviour
     public float separation = 10f; // La separación entre los objetos
     public GameObject Platform;
 
+    // private GameObject[] StonePlatforms;
+    // private int StonePlatforms_size;
+
     private void Start()
     {
+        GeneratePlatforms();
+
+        // StonePlatforms = GameObject.FindGameObjectsWithTag("Stone");
+        // StonePlatforms_size = StonePlatforms.Length;
+    }
+
+    // private void Update(){
+
+    //     if(StonePlatforms_size >= 82){
+    //         Debug.Log(StonePlatforms_size);
+    //     }
+    // }
+    public void GeneratePlatforms(){
         for (int i = 0; i < numberOfObjectsX; i++)
         {
             for (int j = 0; j < numberOfObjectsZ; j++)

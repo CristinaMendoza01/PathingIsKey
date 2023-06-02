@@ -35,7 +35,7 @@ public class PluginConnector : MonoBehaviour
 
     //attributes for non-tracking input
     public int playerSelected = 1;
-    private int trackingDisabledPlayerSpeed = 5;
+    private int trackingDisabledPlayerSpeed = 15;
 
     //attributes for tracking calibration
     [Header("Calibration")]
@@ -207,7 +207,7 @@ public class PluginConnector : MonoBehaviour
                     Vector3 calibratedPos = Vector3.zero;
                         
                     calibratedPos.x = calibratedAxis.x;
-                    calibratedPos.y = (rawPos.y + yOffset) * calibrationScale;
+                    calibratedPos.y = (rawPos.y + yOffset) /** calibrationScale*/;
                     calibratedPos.z = calibratedAxis.y;
 
                     calibratedPos += unityWorldCenter;

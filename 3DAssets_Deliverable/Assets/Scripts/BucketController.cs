@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BucketController : MonoBehaviour
 {
-    private bool isGrabbed = false;
+    public bool isGrabbed = false;
     private bool CanDropWater = false;
     private bool CanDropLava = false;
     public List<GameObject> players = new List<GameObject>();
@@ -32,21 +32,23 @@ public class BucketController : MonoBehaviour
     {   
         if(isGrabbed && tmp_pS != -1){
             this.gameObject.transform.position = players[tmp_pS -1].transform.position;
+        }else{
+            transform.position = OriginalPos;
         }
     }
 
     void OnTriggerEnter(Collider col){
         if(col.CompareTag("Player")){
-            isGrabbed = true;
-            tmp_pS = col.gameObject.GetComponent<PlayerMovement>().playerIndex;
+            if(!isGrabbed){
+                isGrabbed = true;
+                tmp_pS = col.gameObject.GetComponent<PlayerMovement>().playerIndex;
+            }   
         }
-        if(col.CompareTag("Pickaxe")){
+        if(col.CompareTag("Pickaxe") && !col.transform.GetComponent<PickaxeController>().isGrabbed){
             isGrabbed = false;
-            //transform.position = OriginalPos;
         }
-        if(col.CompareTag("Bucket")){
+        if(col.CompareTag("Bucket") && !col.transform.GetComponent<BucketController>().isGrabbed){
             isGrabbed = false;
-            //transform.position = OriginalPos;
         }
         if(col.CompareTag("Water")){
             fillWaterAudio.PlayOneShot(fillWaterSound, 1.0f); 
@@ -99,4 +101,9 @@ public class BucketController : MonoBehaviour
             }
         }
     }
+    // void OnTriggerStay(Collider col){
+    //     if(col.CompareTag("Player") && col.CompareTag("Bucket")){
+    //         isGrabbed = false;
+    //     }
+    // }
 }

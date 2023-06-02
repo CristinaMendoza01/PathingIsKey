@@ -17,6 +17,8 @@ public class PickaxeController : MonoBehaviour
     private AudioSource breakStoneAudio;
     public AudioClip breakStoneSound;
 
+    public GameObject PlatGen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,8 @@ public class PickaxeController : MonoBehaviour
             lastdir = direction;
             direction = players[tmp_pS -1].GetComponent<PlayerMovement>().direction;
             direction.y = 0;
-            
+
+            //POINTS AT PLAYER'S DIRECTION
             if(direction.magnitude > 0.01f){
                 dir_angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
                 Quaternion rotation;
@@ -47,21 +50,25 @@ public class PickaxeController : MonoBehaviour
                 this.transform.rotation = rotation;
             }
 
+            //IF CAN REMOVE THE STONE AND GOES DOWN WITH THE PICKAXE --> Destroy the object.
             if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().CanRemove && players[tmp_pS -1].transform.position.y <= 1){
-                if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().stone != null) breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);               
-                Destroy(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().stone);
+                if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().block != null) breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);               
+                Destroy(this.gameObject.transform.GetChild(0).gameObject.GetComponent<RemoverController>().block);
+                PlatGen.transform.GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
             }
         }
     }
 
     void OnTriggerEnter(Collider col){
         if(col.CompareTag("Player")){
-            isGrabbed = true;
-            tmp_pS = col.gameObject.GetComponent<PlayerMovement>().playerIndex;
+            if(!isGrabbed){
+                isGrabbed = true;
+                tmp_pS = col.gameObject.GetComponent<PlayerMovement>().playerIndex;
+            }
         }
         if (col.CompareTag("Bucket")){
             isGrabbed = false;
-            //transform.position = OriginalPos;
+            transform.position = OriginalPos;
         }
     }
 }
