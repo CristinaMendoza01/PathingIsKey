@@ -9,12 +9,20 @@ Arnau Camarero
 Javier Echavarri
 Cristina Mendoza
 
-# Implementations
+# Initial Implementations
 
 - Different tags for different elements.
 - Movement is only allowed on the Stone and When the player tries to leave the controller won't let it
 - Mechanics to pick the bucket and the pickaxe based on collisions.
 - Mechanics for the buckets to pick either lava or water.
-- Mechanics for the pickaxe to destroy stone, this has been implemented with a Raycast and calculating the direction of the player (for now the destroy button is R). The Pickaxe also Rotates with the player.
+- Mechanics for the pickaxe to destroy stone when tracker goes down.
 - Sounds for the bucket picking water or the pickaxe breaking stone have also been added.
-- These mechanics have not been tested for the trackers, these are tests for when they're off. Later they'll be tested and modified to work with the trackers.
+
+# Mid Implementations
+- Ambiental Sound.
+- Sound for the ruby when is picked up.
+- Pickaxe points at player's direction.
+- Mechanics for the creation of a obsidian or stone platform.
+- Created an advanced path to reach the stone (not optimal).
+- Increased the speed of the players for non-tracking (speed up the process).
+- Added new prefabs and a platform generator to create the platforms
