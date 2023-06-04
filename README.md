@@ -20,6 +20,7 @@ Cristina Mendoza
 
 # Mid Implementations
 - Ambiental Sound.
+- Make that when the ruby is picked up, it disappears.
 - Sound for the ruby when is picked up.
 - Pickaxe points at player's direction.
 - Mechanics for the creation of a obsidian or stone platform.
