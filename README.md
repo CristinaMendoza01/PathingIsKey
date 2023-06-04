@@ -25,4 +25,4 @@ Cristina Mendoza
 - Mechanics for the creation of a obsidian or stone platform.
 - Created an advanced path to reach the stone (not optimal).
 - Increased the speed of the players for non-tracking (speed up the process).
-- Added new prefabs and a platform generator to create the platforms
+- Added new prefabs and a platform generator to create, destroy and regenerate the platforms
