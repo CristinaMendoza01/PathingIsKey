@@ -11,6 +11,20 @@ public class PlatformController : MonoBehaviour
     // public GameObject Obstacle;
 
     public bool notValidPos;
+
+    private AudioSource stoneAudio;
+    public AudioClip stoneSound;
+
+    private AudioSource dropWaterAudio;
+    public AudioClip dropWaterSound;
+
+    private AudioSource lavaAudio;
+    public AudioClip lavaSound;
+
+    private AudioSource obsidianAudio;
+    public AudioClip obsidianSound;
+
+
     // Start is called before the first frame update
     void Start()
     {        
@@ -31,6 +45,13 @@ public class PlatformController : MonoBehaviour
         // Obstacle.SetActive(false);
 
         notValidPos = false;
+
+        stoneAudio = GetComponent<AudioSource>();
+        dropWaterAudio = GetComponent<AudioSource>();
+        lavaAudio = GetComponent<AudioSource>();
+        obsidianAudio = GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame
@@ -47,6 +68,7 @@ public class PlatformController : MonoBehaviour
                 Lava.SetActive(false);
                 transform.gameObject.tag = "Stone";
                 //AUDIO STONE
+                stoneAudio.PlayOneShot(stoneSound, 1.0f); 
                 break;
             case "Obsidian":
                 Debug.Log("Obsidian");
@@ -54,17 +76,20 @@ public class PlatformController : MonoBehaviour
                 Water.SetActive(false);
                 transform.gameObject.tag = "Obsidian";
                 //AUDIO OBSIDIAN
+                obsidianAudio.PlayOneShot(obsidianSound, 1.0f);
                 break;
             case "Lava":
                 Debug.Log("Lava");
                 Lava.SetActive(true);
                 //AUDIO LAVA
+                lavaAudio.PlayOneShot(lavaSound, 1.0f); 
                 break;
             case "Water":
                 //Debug.Log("ININININININ");
                 Debug.Log("Water");
                 Water.SetActive(true);
                 //AUDIO WATER
+                dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
                 break;
             // case "Obstacle":
             //     Debug.Log("Obstacle");

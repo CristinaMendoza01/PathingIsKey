@@ -19,6 +19,8 @@ TagManager:
   - LavaPlat
   - Obsidian
   - GemPlatform
+  - Obstacle
+  - WaterRiver
   layers:
   - Default
   - TransparentFX
