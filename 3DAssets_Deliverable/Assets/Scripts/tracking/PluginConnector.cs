@@ -207,7 +207,7 @@ public class PluginConnector : MonoBehaviour
                     Vector3 calibratedPos = Vector3.zero;
                         
                     calibratedPos.x = calibratedAxis.x;
-                    calibratedPos.y = (rawPos.y + yOffset) /** calibrationScale*/;
+                    calibratedPos.y = ((rawPos.y + yOffset) + 4) * 2  /** calibrationScale*/;
                     calibratedPos.z = calibratedAxis.y;
 
                     calibratedPos += unityWorldCenter;

@@ -39,7 +39,7 @@ public class PickaxeController : MonoBehaviour
             direction.y = 0;
 
             //POINTS AT PLAYER'S DIRECTION
-            if(direction.magnitude > 0.01f){
+            if(direction.magnitude >= 0.3f){
                 dir_angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
                 Quaternion rotation;
                 if(dir_angle != 90 || dir_angle != -90 || dir_angle != 0 || dir_angle != 180 || dir_angle != -180){

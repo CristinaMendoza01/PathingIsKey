@@ -8,7 +8,7 @@ public class PlatformController : MonoBehaviour
     public GameObject Obsidian;
     public GameObject Water;
     public GameObject Lava;
-    public GameObject Obstacle;
+    // public GameObject Obstacle;
 
     public bool notValidPos;
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class PlatformController : MonoBehaviour
         //Debug.Log(Water.transform.name);
         Water.SetActive(false);
 
-        Obstacle.SetActive(false);
+        // Obstacle.SetActive(false);
 
         notValidPos = false;
     }
@@ -66,11 +66,11 @@ public class PlatformController : MonoBehaviour
                 Water.SetActive(true);
                 //AUDIO WATER
                 break;
-            case "Obstacle":
-                Debug.Log("Obstacle");
-                Obstacle.SetActive(true);
-                transform.gameObject.tag = "Obstacle";
-                break;
+            // case "Obstacle":
+            //     Debug.Log("Obstacle");
+            //     Obstacle.SetActive(true);
+            //     transform.gameObject.tag = "Obstacle";
+            //     break;
         }
     }
     
