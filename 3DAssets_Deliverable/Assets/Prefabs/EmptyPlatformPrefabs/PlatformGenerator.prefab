@@ -47,3 +47,4 @@ MonoBehaviour:
   numberOfObjectsZ: 9
   separation: 10
   Platform: {fileID: 270902854399841730, guid: bc69210b8b6be4c3195f266fa969ff01, type: 3}
+  Obstacle: {fileID: 2018124682978223164, guid: 1dde6a937d02c4294af8ae28505b5196, type: 3}
