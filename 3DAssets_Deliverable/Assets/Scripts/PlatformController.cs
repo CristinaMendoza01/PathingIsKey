@@ -26,7 +26,7 @@ public class PlatformController : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {        
         // Stone = this.gameObject.transform.GetChild(0).transform.gameObject;
         // Obsidian = this.gameObject.transform.GetChild(1).transform.gameObject;
@@ -43,6 +43,7 @@ public class PlatformController : MonoBehaviour
         Water.SetActive(false);
 
         // Obstacle.SetActive(false);
+
 
         notValidPos = false;
 
@@ -61,6 +62,7 @@ public class PlatformController : MonoBehaviour
     }
 
     public void UpdatePlatform(string name){
+
         switch (name) {
             case "Stone":
                 //Debug.Log("Stone");
@@ -89,7 +91,7 @@ public class PlatformController : MonoBehaviour
                 Debug.Log("Water");
                 Water.SetActive(true);
                 //AUDIO WATER
-                dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
+                //dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
                 break;
             case "Empty":
                 //Debug.Log("Empty");
