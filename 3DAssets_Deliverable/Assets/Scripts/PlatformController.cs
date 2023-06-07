@@ -63,7 +63,7 @@ public class PlatformController : MonoBehaviour
     public void UpdatePlatform(string name){
         switch (name) {
             case "Stone":
-                Debug.Log("Stone");
+                //Debug.Log("Stone");
                 Stone.SetActive(true);
                 Lava.SetActive(false);
                 transform.gameObject.tag = "Stone";
@@ -71,7 +71,7 @@ public class PlatformController : MonoBehaviour
                 stoneAudio.PlayOneShot(stoneSound, 1.0f); 
                 break;
             case "Obsidian":
-                Debug.Log("Obsidian");
+                //Debug.Log("Obsidian");
                 Obsidian.SetActive(true);
                 Water.SetActive(false);
                 transform.gameObject.tag = "Obsidian";
@@ -79,7 +79,7 @@ public class PlatformController : MonoBehaviour
                 obsidianAudio.PlayOneShot(obsidianSound, 1.0f);
                 break;
             case "Lava":
-                Debug.Log("Lava");
+                //Debug.Log("Lava");
                 Lava.SetActive(true);
                 //AUDIO LAVA
                 lavaAudio.PlayOneShot(lavaSound, 1.0f); 
@@ -91,6 +91,14 @@ public class PlatformController : MonoBehaviour
                 //AUDIO WATER
                 dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
                 break;
+            case "Empty":
+                //Debug.Log("Empty");
+                Stone.SetActive(false);
+                Obsidian.SetActive(false);
+                Lava.SetActive(false);
+                Water.SetActive(false);
+                transform.gameObject.tag = "Empty";
+                break;            
             // case "Obstacle":
             //     Debug.Log("Obstacle");
             //     Obstacle.SetActive(true);

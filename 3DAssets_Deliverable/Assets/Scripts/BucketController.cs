@@ -68,7 +68,23 @@ public class BucketController : MonoBehaviour
             }
         }
         if(col.CompareTag("Empty") && transform.position.y <= 1 && isGrabbed){
-            if(CanDropLava){
+            Debug.Log("Empty");
+            //Chequea que la casilla de enfrente sea agua y que el cubo este vacio
+            if(col.gameObject.transform.GetChild(3).gameObject.activeSelf && !WaterBucket.activeSelf && !LavaBucket.activeSelf){
+                fillWaterAudio.PlayOneShot(fillWaterSound, 1.0f); 
+                //actualiza el cubo y la plataforma
+                CanDropWater = true;
+                WaterBucket.SetActive(true);
+                col.transform.GetComponent<PlatformController>().UpdatePlatform("Empty");
+            }
+            //cheque que la casilla de enfrente sea lava y el cubo este vacio
+            else if(col.gameObject.transform.GetChild(2).gameObject.activeSelf && !WaterBucket.activeSelf && !LavaBucket.activeSelf){
+                //actualiza el cubo y la plataforma
+                CanDropLava = true;
+                LavaBucket.SetActive(true);
+                col.transform.GetComponent<PlatformController>().UpdatePlatform("Empty");
+            }
+            else if(CanDropLava){
                 //Mirar si agua activa
                 Debug.Log(col.gameObject.transform.GetChild(3).gameObject.activeSelf);
                 if(col.gameObject.transform.GetChild(3).gameObject.activeSelf){
@@ -83,7 +99,7 @@ public class BucketController : MonoBehaviour
                 CanDropLava = false;
                 LavaBucket.SetActive(false);
             } 
-            if(CanDropWater){
+            else if(CanDropWater){
                 //Mirar si lava activa
                 Debug.Log(col.gameObject.transform.GetChild(2).gameObject.activeSelf);
                 
@@ -101,6 +117,14 @@ public class BucketController : MonoBehaviour
             }
         }
     }
+
+
+
+
+
+
+
+
     // void OnTriggerStay(Collider col){
     //     if(col.CompareTag("Player") && col.CompareTag("Bucket")){
     //         isGrabbed = false;
