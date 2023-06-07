@@ -21,6 +21,7 @@ TagManager:
   - GemPlatform
   - Obstacle
   - WaterRiver
+  - LavaRiver
   layers:
   - Default
   - TransparentFX
