@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 506382808464778956}
   m_Layer: 0
-  m_Name: Water River
+  m_Name: Lava River
   m_TagString: WaterRiver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

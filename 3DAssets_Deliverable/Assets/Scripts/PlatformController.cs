@@ -23,6 +23,7 @@ public class PlatformController : MonoBehaviour
 
     private AudioSource obsidianAudio;
     public AudioClip obsidianSound;
+    public bool inRiver = false;
 
 
     // Start is called before the first frame update
@@ -91,7 +92,7 @@ public class PlatformController : MonoBehaviour
                 Debug.Log("Water");
                 Water.SetActive(true);
                 //AUDIO WATER
-                //dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
+                dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
                 break;
             case "Empty":
                 //Debug.Log("Empty");
@@ -110,9 +111,24 @@ public class PlatformController : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider col){
-        if(col.CompareTag("Platform") || col.CompareTag("Stone")){
+        if (col.CompareTag("Platform") || col.CompareTag("Stone"))
+        {
             //Debug.Log("aqui"+col.gameObject.name);
             Destroy(this.gameObject);
         }
+        // if(col.CompareTag("WaterRiver") && transform.CompareTag("Stone")){
+        //     //Vector3 movement = new Vector3 (1.0f, 0.0f, 0.0f);
+        //     this.transform.position += Vector3.right;
+        //     Debug.Log(this.transform.position);
+        // }
     }
+
+    public WaterRiver river; // Puedes asignar esto en el Inspector de Unity
+
+    void OnDestroy() {
+        if(transform.CompareTag("Obsidian") && river != null) {
+            river.DecreaseObsidianCount();
+        }
+}
+
 }

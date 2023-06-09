@@ -42,14 +42,14 @@ public class EmptyObjectGenerator : MonoBehaviour
                 GameObject newObj = Instantiate(Platform);
                 newObj.transform.position = position;
                 //if(newObj.transform.GetComponent<PlatformController>().notValidPos) Destroy(newObj);
-                if (j == waterRiverRow){
-                    newObj.GetComponent<PlatformController>().UpdatePlatform("Water");
-                    newObj.transform.SetParent(waterRiver.transform);
-                }
-                if(j == lavaRiverRow){
-                    newObj.GetComponent<PlatformController>().UpdatePlatform("Lava");
-                    newObj.transform.SetParent(lavaRiver.transform);
-                }
+                // if (j == waterRiverRow){
+                //     newObj.GetComponent<PlatformController>().UpdatePlatform("Water");
+                //     newObj.transform.SetParent(waterRiver.transform);
+                // }
+                // if(j == lavaRiverRow){
+                //     newObj.GetComponent<PlatformController>().UpdatePlatform("Lava");
+                //     newObj.transform.SetParent(lavaRiver.transform);
+                // }
             }
         }
     }
