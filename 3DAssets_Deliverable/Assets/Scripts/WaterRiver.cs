@@ -6,7 +6,8 @@ public class WaterRiver : MonoBehaviour
 {
     public int direction;
     private Vector3 originalPos;
-    private bool RiverFlow;
+    public bool RiverFlow;
+    public bool isBlocked;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,10 @@ public class WaterRiver : MonoBehaviour
         else{
             direction = -1;
         }
+        
         RiverFlow = true;
+        isBlocked = false;
+
         Debug.Log(direction);
     }
 
@@ -44,6 +48,7 @@ public class WaterRiver : MonoBehaviour
             float displacement = collider.transform.position.x - (((this.transform.localScale.x *10 ) / 2 )* (-direction));
             this.transform.position = new Vector3(displacement, this.transform.position.y, this.transform.position.z);
             RiverFlow = false;
+            isBlocked = true;
         }
     }
 

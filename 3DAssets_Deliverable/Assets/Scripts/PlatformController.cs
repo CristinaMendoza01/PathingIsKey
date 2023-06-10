@@ -133,19 +133,17 @@ public class PlatformController : MonoBehaviour
             Destroy(this.gameObject);
             GameObject.FindGameObjectWithTag("Generator").GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
         }
-        // if(col.CompareTag("WaterRiver") && transform.CompareTag("Stone")){
-        //     //Vector3 movement = new Vector3 (1.0f, 0.0f, 0.0f);
-        //     this.transform.position += Vector3.right;
-        //     Debug.Log(this.transform.position);
-        // }
+        if(col.CompareTag("Obsidian") && this.transform.CompareTag("WaterStone")){
+            inRiver = true;
+            this.transform.position = new Vector3(col.transform.position.x  + (10 * -waterRiverObj.GetComponent<WaterRiver>().direction), this.transform.position.y, this.transform.position.z);
+            this.transform.tag = "Stone";
+        }
     }
 
 //     public WaterRiver river; // Puedes asignar esto en el Inspector de Unity
 
-//     void OnDestroy() {
-//         if(transform.CompareTag("Obsidian") && river != null) {
-//             river.DecreaseObsidianCount();
-//         }
-// }
+    void OnDestroy() {
+        if(this.transform.tag == "Obsidian") waterRiverObj.GetComponent<WaterRiver>().RiverFlow = true;
+    }
 
 }
