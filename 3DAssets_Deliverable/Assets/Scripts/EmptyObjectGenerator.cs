@@ -30,7 +30,7 @@ public class EmptyObjectGenerator : MonoBehaviour
     public void GeneratePlatforms(){
         GameObject waterRiver = GameObject.FindGameObjectWithTag("WaterRiver");
         GameObject lavaRiver = GameObject.FindGameObjectWithTag("LavaRiver");
-        Debug.Log(waterRiver);
+        //Debug.Log(waterRiver);
         for (int i = 0; i < numberOfObjectsX; i++)
         {
             for (int j = 0; j < numberOfObjectsZ; j++)

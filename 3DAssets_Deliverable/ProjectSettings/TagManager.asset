@@ -22,6 +22,9 @@ TagManager:
   - Obstacle
   - WaterRiver
   - LavaRiver
+  - WaterStone
+  - Generator
+  - Boundary
   layers:
   - Default
   - TransparentFX

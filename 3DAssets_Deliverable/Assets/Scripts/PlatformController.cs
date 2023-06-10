@@ -23,7 +23,9 @@ public class PlatformController : MonoBehaviour
 
     private AudioSource obsidianAudio;
     public AudioClip obsidianSound;
-    public bool inRiver = false;
+
+    public GameObject waterRiverObj;
+    public bool inRiver;
 
 
     // Start is called before the first frame update
@@ -53,13 +55,19 @@ public class PlatformController : MonoBehaviour
         lavaAudio = GetComponent<AudioSource>();
         obsidianAudio = GetComponent<AudioSource>();
 
+        inRiver = false;
+        
+        waterRiverObj = GameObject.FindGameObjectWithTag("WaterRiver");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(inRiver){
+            Debug.Log("MOVING STONE");
+            this.transform.position += Vector3.right/2 * waterRiverObj.GetComponent<WaterRiver>().direction;
+        }
     }
 
     public void UpdatePlatform(string name){
@@ -89,7 +97,7 @@ public class PlatformController : MonoBehaviour
                 break;
             case "Water":
                 //Debug.Log("ININININININ");
-                Debug.Log("Water");
+                //Debug.Log("Water");
                 Water.SetActive(true);
                 //AUDIO WATER
                 dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
@@ -116,6 +124,15 @@ public class PlatformController : MonoBehaviour
             //Debug.Log("aqui"+col.gameObject.name);
             Destroy(this.gameObject);
         }
+        if(col.CompareTag("WaterRiver") && this.transform.CompareTag("Stone")){
+            Debug.Log("MOVING STONE");
+            inRiver = true;
+            this.transform.gameObject.tag = "WaterStone";
+        }
+        if(col.CompareTag("Boundary")){
+            Destroy(this.gameObject);
+            GameObject.FindGameObjectWithTag("Generator").GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
+        }
         // if(col.CompareTag("WaterRiver") && transform.CompareTag("Stone")){
         //     //Vector3 movement = new Vector3 (1.0f, 0.0f, 0.0f);
         //     this.transform.position += Vector3.right;
@@ -123,12 +140,12 @@ public class PlatformController : MonoBehaviour
         // }
     }
 
-    public WaterRiver river; // Puedes asignar esto en el Inspector de Unity
+//     public WaterRiver river; // Puedes asignar esto en el Inspector de Unity
 
-    void OnDestroy() {
-        if(transform.CompareTag("Obsidian") && river != null) {
-            river.DecreaseObsidianCount();
-        }
-}
+//     void OnDestroy() {
+//         if(transform.CompareTag("Obsidian") && river != null) {
+//             river.DecreaseObsidianCount();
+//         }
+// }
 
 }

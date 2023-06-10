@@ -491,6 +491,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 890409280471619475, guid: 18087ac97f8aedc40924d98ddc1d59fc, type: 3}
+      propertyPath: m_TagString
+      value: LavaPlat
+      objectReference: {fileID: 0}
     - target: {fileID: 8783186001406366473, guid: 18087ac97f8aedc40924d98ddc1d59fc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -750,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6783286832237517437, guid: 65f7ed93a69e8ce42bc5295acb2786cf, type: 3}
       propertyPath: m_TagString
-      value: Obsidian
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65f7ed93a69e8ce42bc5295acb2786cf, type: 3}

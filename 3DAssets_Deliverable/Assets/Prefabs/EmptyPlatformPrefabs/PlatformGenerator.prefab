@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6943796545457571531}
   m_Layer: 0
   m_Name: PlatformGenerator
-  m_TagString: Untagged
+  m_TagString: Generator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,8 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124293a9db0754580b35774715363b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfObjectsX: 10
+  numberOfObjectsX: 9
   numberOfObjectsZ: 9
   separation: 10
   Platform: {fileID: 270902854399841730, guid: bc69210b8b6be4c3195f266fa969ff01, type: 3}
-  Obstacle: {fileID: 2018124682978223164, guid: 1dde6a937d02c4294af8ae28505b5196, type: 3}
+  waterRiverRow: 2
+  lavaRiverRow: 4

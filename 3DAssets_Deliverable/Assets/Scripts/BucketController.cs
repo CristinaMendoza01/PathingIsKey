@@ -68,7 +68,7 @@ public class BucketController : MonoBehaviour
             }
         }
         if(col.CompareTag("Empty") && transform.position.y <= 1 && isGrabbed){
-            Debug.Log("Empty");
+            //Debug.Log("Empty");
             //Chequea que la casilla de enfrente sea agua y que el cubo este vacio
             if(col.gameObject.transform.GetChild(3).gameObject.activeSelf && !WaterBucket.activeSelf && !LavaBucket.activeSelf){
                 fillWaterAudio.PlayOneShot(fillWaterSound, 1.0f); 
@@ -86,7 +86,7 @@ public class BucketController : MonoBehaviour
             }
             else if(CanDropLava){
                 //Mirar si agua activa
-                Debug.Log(col.gameObject.transform.GetChild(3).gameObject.activeSelf);
+                //Debug.Log(col.gameObject.transform.GetChild(3).gameObject.activeSelf);
                 if(col.gameObject.transform.GetChild(3).gameObject.activeSelf){
                     //SI --> Hacer aparecer obsidiana
                     col.transform.GetComponent<PlatformController>().UpdatePlatform("Obsidian");
@@ -101,7 +101,7 @@ public class BucketController : MonoBehaviour
             } 
             else if(CanDropWater){
                 //Mirar si lava activa
-                Debug.Log(col.gameObject.transform.GetChild(2).gameObject.activeSelf);
+                //Debug.Log(col.gameObject.transform.GetChild(2).gameObject.activeSelf);
                 
                 if(col.gameObject.transform.GetChild(2).gameObject.activeSelf){
                     //SI --> Hacer aparecer piedra
