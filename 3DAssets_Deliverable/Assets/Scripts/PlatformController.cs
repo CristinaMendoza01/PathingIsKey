@@ -66,7 +66,7 @@ public class PlatformController : MonoBehaviour
     {
         if(inRiver){
             Debug.Log("MOVING STONE");
-            this.transform.position += Vector3.right/2 * waterRiverObj.GetComponent<WaterRiver>().direction;
+            this.transform.position += Vector3.right * Time.deltaTime * waterRiverObj.GetComponent<WaterRiver>().FlowSpeed * -waterRiverObj.GetComponent<WaterRiver>().direction;
         }
     }
 
@@ -109,19 +109,13 @@ public class PlatformController : MonoBehaviour
                 Lava.SetActive(false);
                 Water.SetActive(false);
                 transform.gameObject.tag = "Empty";
-                break;            
-            // case "Obstacle":
-            //     Debug.Log("Obstacle");
-            //     Obstacle.SetActive(true);
-            //     transform.gameObject.tag = "Obstacle";
-            //     break;
+                break;    
         }
     }
     
     void OnTriggerEnter(Collider col){
         if (col.CompareTag("Platform") || col.CompareTag("Stone"))
         {
-            //Debug.Log("aqui"+col.gameObject.name);
             Destroy(this.gameObject);
         }
         if(col.CompareTag("WaterRiver") && this.transform.CompareTag("Stone")){
@@ -134,16 +128,26 @@ public class PlatformController : MonoBehaviour
             GameObject.FindGameObjectWithTag("Generator").GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
         }
         if(col.CompareTag("Obsidian") && this.transform.CompareTag("WaterStone")){
-            inRiver = true;
-            this.transform.position = new Vector3(col.transform.position.x  + (10 * -waterRiverObj.GetComponent<WaterRiver>().direction), this.transform.position.y, this.transform.position.z);
-            this.transform.tag = "Stone";
+            inRiver = false;
+            this.transform.position = new Vector3(col.transform.position.x  + (10 * waterRiverObj.GetComponent<WaterRiver>().direction), this.transform.position.y, this.transform.position.z);
+        }
+        if(col.CompareTag("WaterStone") && (col.transform.position == this.transform.position)) Destroy(this.gameObject);
+    }
+
+    void OnTriggerStay(Collider col){
+        if(col.CompareTag("WaterRiver") && this.transform.CompareTag("WaterStone")){
+            if(waterRiverObj.transform.position == waterRiverObj.GetComponent<WaterRiver>().originalPos){
+                inRiver = true;
+            }
         }
     }
 
 //     public WaterRiver river; // Puedes asignar esto en el Inspector de Unity
 
     void OnDestroy() {
-        if(this.transform.tag == "Obsidian") waterRiverObj.GetComponent<WaterRiver>().RiverFlow = true;
+        if(this.transform.tag == "Obsidian") {
+            waterRiverObj.GetComponent<WaterRiver>().RiverFlow = true;
+        }   
     }
 
 }

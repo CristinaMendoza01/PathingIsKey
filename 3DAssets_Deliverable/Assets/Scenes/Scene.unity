@@ -1609,7 +1609,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 4.3420005, z: 9.5}
+  m_Size: {x: 10, y: 4, z: 9.5}
   m_Center: {x: 0, y: -0.82899976, z: 0}
 --- !u!64 &299398018
 MeshCollider:
@@ -1703,6 +1703,7 @@ MonoBehaviour:
   direction: 0
   RiverFlow: 0
   isBlocked: 0
+  FlowSpeed: 100
 --- !u!1001 &325453052
 PrefabInstance:
   m_ObjectHideFlags: 0

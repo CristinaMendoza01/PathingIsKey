@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Platform") || col.CompareTag("Stone"))
+        if (col.CompareTag("Platform") || col.CompareTag("Stone") || col.CompareTag("WaterStone"))
         {
             //isValidpos = true;
             tmppos = col.transform.position;
