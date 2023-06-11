@@ -75,6 +75,7 @@ MonoBehaviour:
   dropWaterSound: {fileID: 8300000, guid: 03c1dac6e15ad48729d6ecbe6bdadf0b, type: 3}
   lavaSound: {fileID: 8300000, guid: 3d545d258b26146e99c9ddb2527b98fe, type: 3}
   obsidianSound: {fileID: 8300000, guid: 1ac08c2595c30204caeac06bc578d787, type: 3}
+  PlatGen: {fileID: 6943796545457571530, guid: 1610f60683de04f45bc7816a2cb29ff4, type: 3}
   inRiver: 0
 --- !u!54 &8481844122207950626
 Rigidbody:

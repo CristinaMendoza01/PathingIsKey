@@ -24,6 +24,7 @@ public class PlatformController : MonoBehaviour
     private AudioSource obsidianAudio;
     public AudioClip obsidianSound;
 
+    public GameObject PlatGen;
     private GameObject waterRiverObj;
     public bool inRiver;
 
@@ -31,22 +32,13 @@ public class PlatformController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {        
-        // Stone = this.gameObject.transform.GetChild(0).transform.gameObject;
-        // Obsidian = this.gameObject.transform.GetChild(1).transform.gameObject;
-        // Lava = this.gameObject.transform.GetChild(2).transform.gameObject;
-        // Water = this.gameObject.transform.GetChild(3).transform.gameObject;
-
-        //Debug.Log(Stone.transform.name);
         Stone.SetActive(false);
-        //Debug.Log(Obsidian.transform.name);
+
         Obsidian.SetActive(false);
-        //Debug.Log(Lava.transform.name);
+
         Lava.SetActive(false);
-        //Debug.Log(Water.transform.name);
+
         Water.SetActive(false);
-
-        // Obstacle.SetActive(false);
-
 
         notValidPos = false;
 
@@ -65,7 +57,6 @@ public class PlatformController : MonoBehaviour
     void Update()
     {
         if(inRiver){
-            Debug.Log("MOVING STONE");
             this.transform.position += Vector3.right * Time.deltaTime * waterRiverObj.GetComponent<WaterRiver>().FlowSpeed * -waterRiverObj.GetComponent<WaterRiver>().direction;
         }
     }
@@ -74,7 +65,6 @@ public class PlatformController : MonoBehaviour
 
         switch (name) {
             case "Stone":
-                //Debug.Log("Stone");
                 Stone.SetActive(true);
                 Lava.SetActive(false);
                 transform.gameObject.tag = "Stone";
@@ -82,7 +72,6 @@ public class PlatformController : MonoBehaviour
                 stoneAudio.PlayOneShot(stoneSound, 1.0f); 
                 break;
             case "Obsidian":
-                //Debug.Log("Obsidian");
                 Obsidian.SetActive(true);
                 Water.SetActive(false);
                 transform.gameObject.tag = "Obsidian";
@@ -90,20 +79,16 @@ public class PlatformController : MonoBehaviour
                 obsidianAudio.PlayOneShot(obsidianSound, 1.0f);
                 break;
             case "Lava":
-                //Debug.Log("Lava");
                 Lava.SetActive(true);
                 //AUDIO LAVA
                 lavaAudio.PlayOneShot(lavaSound, 1.0f); 
                 break;
             case "Water":
-                //Debug.Log("ININININININ");
-                //Debug.Log("Water");
                 Water.SetActive(true);
                 //AUDIO WATER
                 dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
                 break;
             case "Empty":
-                //Debug.Log("Empty");
                 Stone.SetActive(false);
                 Obsidian.SetActive(false);
                 Lava.SetActive(false);
@@ -114,24 +99,37 @@ public class PlatformController : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider col){
-        if (col.CompareTag("Platform") || col.CompareTag("Stone"))
+
+        //Possible overlap check
+        if (col.CompareTag("Platform") || col.CompareTag("Stone") || col.CompareTag("Obstacle"))
         {
-            Destroy(this.gameObject);
+            if(this.transform.tag != "WaterStone") Destroy(this.gameObject);
         }
+
+        //Stone in river
         if(col.CompareTag("WaterRiver") && this.transform.CompareTag("Stone")){
-            Debug.Log("MOVING STONE");
+            //Debug.Log("MOVING STONE");
             inRiver = true;
             this.transform.gameObject.tag = "WaterStone";
         }
+
+        //Stone goes to the limit of the map
         if(col.CompareTag("Boundary")){
+            Debug.Log("DESTROYED STONE");
             Destroy(this.gameObject);
-            GameObject.FindGameObjectWithTag("Generator").GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
+            PlatGen.transform.GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
         }
+
+        //Stone in river collides with obsidian
         if(col.CompareTag("Obsidian") && this.transform.CompareTag("WaterStone")){
             inRiver = false;
             this.transform.position = new Vector3(col.transform.position.x  + (10 * waterRiverObj.GetComponent<WaterRiver>().direction), this.transform.position.y, this.transform.position.z);
         }
-        if(col.CompareTag("WaterStone") && (col.transform.position == this.transform.position)) Destroy(this.gameObject);
+
+        //
+        //if(col.CompareTag("WaterStone") && (col.transform.position == this.transform.position)) Destroy(this.gameObject);
+
+
     }
 
     void OnTriggerStay(Collider col){
