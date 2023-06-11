@@ -24,7 +24,7 @@ public class PlatformController : MonoBehaviour
     private AudioSource obsidianAudio;
     public AudioClip obsidianSound;
 
-    public GameObject waterRiverObj;
+    private GameObject waterRiverObj;
     public bool inRiver;
 
 
