@@ -62,7 +62,7 @@ public class PickaxeController : MonoBehaviour
                     }    
                 }          
                 Destroy(childRemover.GetComponent<RemoverController>().block);
-                PlatGen.transform.GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
+                PlatGen.transform.GetComponent<EmptyObjectGenerator>().FillPlatforms(childRemover.GetComponent<RemoverController>().block.GetComponent<PlatformController>().ID[0],childRemover.GetComponent<RemoverController>().block.GetComponent<PlatformController>().ID[1]);
             }
         }
     }

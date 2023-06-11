@@ -28,6 +28,8 @@ public class PlatformController : MonoBehaviour
     private GameObject waterRiverObj;
     public bool inRiver;
 
+    public int[] ID = new int[2];
+
 
     // Start is called before the first frame update
     void Awake()
@@ -103,7 +105,7 @@ public class PlatformController : MonoBehaviour
         //Possible overlap check
         if (col.CompareTag("Platform") || col.CompareTag("Stone") || col.CompareTag("Obstacle"))
         {
-            if(this.transform.tag != "WaterStone") Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
 
         //Stone in river
@@ -115,9 +117,11 @@ public class PlatformController : MonoBehaviour
 
         //Stone goes to the limit of the map
         if(col.CompareTag("Boundary")){
+            Debug.Log(ID[0].ToString() + ID[1].ToString());
             Debug.Log("DESTROYED STONE");
-            Destroy(this.gameObject);
-            PlatGen.transform.GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
+            PlatGen.transform.GetComponent<EmptyObjectGenerator>().FillPlatforms(ID[0],ID[1]);
+            this.gameObject.SetActive(false);
+            //PlatGen.transform.GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
         }
 
         //Stone in river collides with obsidian

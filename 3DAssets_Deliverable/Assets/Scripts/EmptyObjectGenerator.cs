@@ -30,44 +30,45 @@ public class EmptyObjectGenerator : MonoBehaviour
                 // Position of the next object
                 Vector3 position = new Vector3((i+1) * separation, 0, (j+1) * separation);
 
-                GameObject newObj = Instantiate(Platform);
-                newObj.transform.position = position;
+                // Get the size of the platform
+                Vector3 platformSize = new Vector3(9.5f, 8f, 9.5f);
 
-                if (Done)
+                // Calculate the bounds of the platform
+                Bounds platformBounds = new Bounds(position, platformSize);
+
+                // Check for overlapping colliders with the "Empty" tag
+                Collider[] overlappingColliders = new Collider[]{}; // Adjust the size as per your needs
+                int numOverlappingColliders = Physics.OverlapBoxNonAlloc(platformBounds.center, platformSize / 2, overlappingColliders);
+
+                bool overlapWithEmpty = false;
+
+                // Check each overlapping collider
+                for (int r = 0; r < overlappingColliders.Length; r++)
                 {
-                    if(newObj.transform.position.x == 90 && newObj.transform.position.z == 70) Debug.Log("CHECKED");
-
-                    // Get the size of the platform
-                    Vector3 platformSize = newObj.GetComponent<BoxCollider>().size;
-
-                    // Calculate the bounds of the platform
-                    Bounds platformBounds = new Bounds(newObj.transform.position, platformSize);
-
-                    // Check for overlapping colliders with the "Empty" tag
-                    Collider[] overlappingColliders = new Collider[9*9]; // Adjust the size as per your needs
-                    int numOverlappingColliders = Physics.OverlapBoxNonAlloc(platformBounds.center, platformSize / 2, overlappingColliders);
-
-                    bool overlapWithEmpty = false;
-
-                    // Check each overlapping collider
-                    for (int r = 0; r < numOverlappingColliders; r++)
+                    Collider collider = overlappingColliders[r];
+                    if (collider.CompareTag("Empty") || collider.CompareTag("Platform") || collider.CompareTag("Stone") || collider.CompareTag("Obstacle") || collider.CompareTag("Obsidian"))
                     {
-                        Collider collider = overlappingColliders[r];
-                        if (collider.CompareTag("Empty") || collider.CompareTag("Platform") || collider.CompareTag("Stone") || collider.CompareTag("Obstacle") || collider.CompareTag("Obsidian"))
-                        {
-                            overlapWithEmpty = true;
-                            break;
-                        }
-                    }
-                    if(newObj.transform.position.x == 90 && newObj.transform.position.z == 70) Debug.Log(overlapWithEmpty);
-                    if (overlapWithEmpty)
-                    {
-                        Destroy(newObj); // Destroy the newly instantiated platform
+                        overlapWithEmpty = true;
+                        break;
                     }
                 }
+                
+                if (!overlapWithEmpty)
+                {
+                    GameObject newObj = Instantiate(Platform, position, Quaternion.identity);
+                    newObj.GetComponent<PlatformController>().ID[0] = i;
+                    newObj.GetComponent<PlatformController>().ID[1] = j;
+                }
+                
             }
         }
-        Done = true;
+    }
+
+    public void FillPlatforms(int i, int j){
+        Vector3 position = new Vector3((i+1) * separation, 0, (j+1) * separation);
+        GameObject newObj = Instantiate(Platform, position, Quaternion.identity);
+        newObj.GetComponent<PlatformController>().ID[0] = i;
+        newObj.GetComponent<PlatformController>().ID[1] = j;
     }
 
 }
