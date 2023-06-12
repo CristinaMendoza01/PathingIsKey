@@ -6,7 +6,9 @@ This project consists in a collaborative videogame where two children, between 8
 # Team members
 
 Arnau Camarero
+
 Javier Echavarri
+
 Cristina Mendoza
 
 # Initial Implementations
@@ -31,13 +33,13 @@ Cristina Mendoza
 
 # Advanced implementations
 
-- Addition of rivers with currents where if a block of obsidian is played the river is blocked and
+- Addition of rivers with currents where if a block of obsidian is placed the river is blocked and
   if stone is placed then the block is carried away with the current.
 - Addition of obstacles such as trees and mountains where the players can't place a platform
 - Mechanic where the bucket can pick up lava or water placed on a platform
 - Fixed bug that duplicated platforms when one was destroyed
 - Updated lava audio
-- Addition of decoration such as flowers
+- Addition of decoration such as flowers, trees, rocks, and a mountain.
 - Modification of ruby, added rotation and increased the scale
 - Instead of destroy objects we disable 'if (SetActive(false)) -> Disable them
 - Created a New función FillPlatforms
