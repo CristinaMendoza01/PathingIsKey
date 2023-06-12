@@ -5,10 +5,13 @@ using UnityEngine;
 public class RemoverController : MonoBehaviour
 {
     public bool CanRemove = false;
+    
+    //GameObjects
     private GameObject block;
     public GameObject PlatGen;
     public GameObject WaterRiver;
 
+    //Audios
     private AudioSource breakStoneAudio;
     public AudioClip breakStoneSound;
 
@@ -17,7 +20,7 @@ public class RemoverController : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider col){
-        //Debug.Log(transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed);
+
         if((col.CompareTag("Stone") || col.CompareTag("Obsidian")) && transform.parent.gameObject.GetComponent<PickaxeController>().isGrabbed){
             block = col.gameObject;
 
@@ -37,13 +40,8 @@ public class RemoverController : MonoBehaviour
                 block.SetActive(false);
                 PlatGen.transform.GetComponent<EmptyObjectGenerator>().FillPlatforms(ID_0, ID_1);
             }
-            // if(block != null) breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);
-            // if(col.CompareTag("Stone")) block.transform.GetComponent<PlatformController>().Stone.SetActive(false);
-            // if(col.CompareTag("Obsidian")) block.transform.GetComponent<PlatformController>().Obsidian.SetActive(false);
 
         }
-        // if(col.CompareTag("Platform")){
-        //     CanRemove = false;
-        // }
+        
     }
 }

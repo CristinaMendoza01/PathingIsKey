@@ -5,14 +5,15 @@ using System.Linq;
 
 public class EmptyObjectGenerator : MonoBehaviour
 {
-    public int numberOfObjectsX; // Número de objetos a generar en el eje X
-    public int numberOfObjectsZ; // Número de objetos a generar en el eje Z
-    public float separation = 10f; // La separación entre los objetos
+    public int numberOfObjectsX; // Number of objects to generate in X axis
+    public int numberOfObjectsZ; // Number of objects to generate in Y axis
+    public float separation = 10f; // Separation for each platform center
     public GameObject Platform;
     public bool Done = false;
 
     private void Start()
     {
+        //Generate platform on start.
         GeneratePlatforms();
     }
 
@@ -20,8 +21,6 @@ public class EmptyObjectGenerator : MonoBehaviour
     {
         GameObject waterRiver = GameObject.FindGameObjectWithTag("WaterRiver");
         GameObject lavaRiver = GameObject.FindGameObjectWithTag("LavaRiver");
-
-        Debug.Log("IN");
 
         for (int i = 0; i < numberOfObjectsX; i++)
         {
@@ -53,6 +52,7 @@ public class EmptyObjectGenerator : MonoBehaviour
                     }
                 }
                 
+                //If is not overlapping instantiate the prefab emptyplatform. 
                 if (!overlapWithEmpty)
                 {
                     GameObject newObj = Instantiate(Platform, position, Quaternion.identity);
@@ -67,6 +67,7 @@ public class EmptyObjectGenerator : MonoBehaviour
         }
     }
 
+    //Fill the space of the position set with a emptyplatform prefab.
     public void FillPlatforms(int i, int j){
         Vector3 position = new Vector3((i+1) * separation, 0, (j+1) * separation);
         GameObject newObj = Instantiate(Platform, position, Quaternion.identity);

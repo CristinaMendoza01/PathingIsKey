@@ -7,19 +7,24 @@ public class BucketController : MonoBehaviour
     public bool isGrabbed = false;
     private bool CanDropWater = false;
     private bool CanDropLava = false;
+
     public List<GameObject> players = new List<GameObject>();
     private int tmp_pS;
+    
     private Vector3 OriginalPos;
-
+    
+    //GameObject
     public GameObject WaterBucket;
     public GameObject LavaBucket;
     public GameObject EmptyPlatform;
     
+    //AUDIO
     private AudioSource fillWaterAudio;
     public AudioClip fillWaterSound;
 
     private AudioSource fillLavaAudio;
     public AudioClip fillLavaSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,7 @@ public class BucketController : MonoBehaviour
         }
     }
 
+    //Check collisions to control the mechanics
     void OnTriggerEnter(Collider col){
         if(col.CompareTag("Player")){
             if(!isGrabbed){
@@ -48,12 +54,15 @@ public class BucketController : MonoBehaviour
                 tmp_pS = col.gameObject.GetComponent<PlayerMovement>().playerIndex;
             }   
         }
+        //Check collision with pickaxe to change the tool
         if(col.CompareTag("Pickaxe") && !col.transform.GetComponent<PickaxeController>().isGrabbed){
             isGrabbed = false;
         }
+        //Check collision with bucket to change the tool
         if(col.CompareTag("Bucket") && !col.transform.GetComponent<BucketController>().isGrabbed){
             isGrabbed = false;
         }
+        //Fill the bucket with water
         if(col.CompareTag("Water")){
             fillWaterAudio.PlayOneShot(fillWaterSound, 1.0f); 
             CanDropWater = true;
@@ -63,6 +72,7 @@ public class BucketController : MonoBehaviour
                 LavaBucket.SetActive(false);
             }
         }
+        //Fill the bucket with lava
         if(col.CompareTag("Lava")){
             fillLavaAudio.PlayOneShot(fillLavaSound, 1.0f); 
             CanDropLava = true;
@@ -72,32 +82,31 @@ public class BucketController : MonoBehaviour
                 WaterBucket.SetActive(false);
             }
         }
+        //Fill the platform with the element filled
         if(col.CompareTag("Empty") && transform.position.y <= 1 && isGrabbed){
-            //Debug.Log("Empty");
-            //Chequea que la casilla de enfrente sea agua y que el cubo este vacio
+            //Check if the plaform ahead is water and the bucket is empty
             if(col.gameObject.transform.GetChild(3).gameObject.activeSelf && !WaterBucket.activeSelf && !LavaBucket.activeSelf){
                 fillWaterAudio.PlayOneShot(fillWaterSound, 1.0f); 
-                //actualiza el cubo y la plataforma
+                //Update the bucket and platform
                 CanDropWater = true;
                 WaterBucket.SetActive(true);
                 col.transform.GetComponent<PlatformController>().UpdatePlatform("Empty");
             }
-            //cheque que la casilla de enfrente sea lava y el cubo este vacio
+            //Check if the plaform ahead is water and the bucket is empty
             else if(col.gameObject.transform.GetChild(2).gameObject.activeSelf && !WaterBucket.activeSelf && !LavaBucket.activeSelf){
-                //actualiza el cubo y la plataforma
+                //Update the bucket and platform
                 CanDropLava = true;
                 LavaBucket.SetActive(true);
                 col.transform.GetComponent<PlatformController>().UpdatePlatform("Empty");
             }
             else if(CanDropLava){
-                //Mirar si agua activa
-                //Debug.Log(col.gameObject.transform.GetChild(3).gameObject.activeSelf);
+                //Water is active?
                 if(col.gameObject.transform.GetChild(3).gameObject.activeSelf){
-                    //SI --> Hacer aparecer obsidiana
+                    //Yes --> Make obsidian
                     col.transform.GetComponent<PlatformController>().UpdatePlatform("Obsidian");
                 }
                 else {
-                    //NO --> Hacer aparecer lava
+                    //No --> Put lava
                     col.transform.GetComponent<PlatformController>().UpdatePlatform("Lava");
 
                 }
@@ -105,16 +114,13 @@ public class BucketController : MonoBehaviour
                 LavaBucket.SetActive(false);
             } 
             else if(CanDropWater){
-                //Mirar si lava activa
-                //Debug.Log(col.gameObject.transform.GetChild(2).gameObject.activeSelf);
-                
+                //Lava is active?
                 if(col.gameObject.transform.GetChild(2).gameObject.activeSelf){
-                    //SI --> Hacer aparecer piedra
+                    //Yes --> Make stone
                     col.transform.GetComponent<PlatformController>().UpdatePlatform("Stone");
                 }
                 else {
-                    
-                    //NO --> Hacer aparecer agua
+                    //No --> Put water
                     col.transform.GetComponent<PlatformController>().UpdatePlatform("Water");
                 }
                 CanDropWater = false;
@@ -122,17 +128,4 @@ public class BucketController : MonoBehaviour
             }
         }
     }
-
-
-
-
-
-
-
-
-    // void OnTriggerStay(Collider col){
-    //     if(col.CompareTag("Player") && col.CompareTag("Bucket")){
-    //         isGrabbed = false;
-    //     }
-    // }
 }

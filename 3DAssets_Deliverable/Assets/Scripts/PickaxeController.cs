@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PickaxeController : MonoBehaviour
 {
-    public bool isGrabbed = false;
-    public List<GameObject> players = new List<GameObject>();
     private Vector3 OriginalPos;
-    private int tmp_pS;
-
     private Vector3 direction;
     private Vector3 lastdir;
 
+    public List<GameObject> players = new List<GameObject>();
+    private int tmp_pS;
+    
     private float dir_angle;
+
+    public bool isGrabbed = false;
 
     private AudioSource breakStoneAudio;
     public AudioClip breakStoneSound;
-
 
     // Start is called before the first frame update
     void Start()

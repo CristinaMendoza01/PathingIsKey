@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
+    //GameObjects
+    private GameObject waterRiverObj;
+    public GameObject PlatGen;
     public GameObject Stone;
     public GameObject Obsidian;
     public GameObject Water;
     public GameObject Lava;
-    // public GameObject Obstacle;
 
     public bool notValidPos;
 
+    //AUDIO
     private AudioSource stoneAudio;
     public AudioClip stoneSound;
 
@@ -24,10 +27,9 @@ public class PlatformController : MonoBehaviour
     private AudioSource obsidianAudio;
     public AudioClip obsidianSound;
 
-    public GameObject PlatGen;
-    private GameObject waterRiverObj;
     public bool inRiver;
 
+    //Unique ID for each platform
     public int[] ID = new int[2];
 
 
@@ -63,34 +65,30 @@ public class PlatformController : MonoBehaviour
         }
     }
 
-    public void UpdatePlatform(string name){
+    public void UpdatePlatform(string name){ //Updates the state of the platform
 
         switch (name) {
-            case "Stone":
+            case "Stone": //converts the platform into stone
                 Stone.SetActive(true);
                 Lava.SetActive(false);
                 transform.gameObject.tag = "Stone";
-                //AUDIO STONE
                 stoneAudio.PlayOneShot(stoneSound, 1.0f); 
                 break;
-            case "Obsidian":
+            case "Obsidian"://converts the platform into obsidian
                 Obsidian.SetActive(true);
                 Water.SetActive(false);
                 transform.gameObject.tag = "Obsidian";
-                //AUDIO OBSIDIAN
                 obsidianAudio.PlayOneShot(obsidianSound, 1.0f);
                 break;
-            case "Lava":
+            case "Lava"://converts the platform into lava
                 Lava.SetActive(true);
-                //AUDIO LAVA
                 lavaAudio.PlayOneShot(lavaSound, 1.0f); 
                 break;
-            case "Water":
+            case "Water"://converts the platform into water
                 Water.SetActive(true);
-                //AUDIO WATER
                 dropWaterAudio.PlayOneShot(dropWaterSound, 1.0f); 
                 break;
-            case "Empty":
+            case "Empty"://converts the platform into emptyplatform
                 Stone.SetActive(false);
                 Obsidian.SetActive(false);
                 Lava.SetActive(false);
@@ -110,7 +108,6 @@ public class PlatformController : MonoBehaviour
 
         //Stone in river
         if(col.CompareTag("WaterRiver") && this.transform.CompareTag("Stone")){
-            //Debug.Log("MOVING STONE");
             inRiver = true;
             this.transform.gameObject.tag = "WaterStone";
         }
@@ -121,7 +118,6 @@ public class PlatformController : MonoBehaviour
             Debug.Log("DESTROYED STONE");
             PlatGen.transform.GetComponent<EmptyObjectGenerator>().FillPlatforms(ID[0],ID[1]);
             this.gameObject.SetActive(false);
-            //PlatGen.transform.GetComponent<EmptyObjectGenerator>().GeneratePlatforms();
         }
 
         //Stone in river collides with obsidian
@@ -129,11 +125,6 @@ public class PlatformController : MonoBehaviour
             inRiver = false;
             this.transform.position = new Vector3(col.transform.position.x  + (10 * waterRiverObj.GetComponent<WaterRiver>().direction), this.transform.position.y, this.transform.position.z);
         }
-
-        //
-        //if(col.CompareTag("WaterStone") && (col.transform.position == this.transform.position)) Destroy(this.gameObject);
-
-
     }
 
     void OnTriggerStay(Collider col){
@@ -143,8 +134,4 @@ public class PlatformController : MonoBehaviour
             }
         }
     }
-
-//     public WaterRiver river; // Puedes asignar esto en el Inspector de Unity
-
-
 }
