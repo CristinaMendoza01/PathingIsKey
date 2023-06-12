@@ -17,9 +17,6 @@ public class PickaxeController : MonoBehaviour
     private AudioSource breakStoneAudio;
     public AudioClip breakStoneSound;
 
-    public GameObject PlatGen;
-    public GameObject WaterRiver;
-
 
     // Start is called before the first frame update
     void Start()
@@ -50,19 +47,6 @@ public class PickaxeController : MonoBehaviour
                     rotation = Quaternion.Euler(90f,0f, dir_angle);
                 }
                 this.transform.rotation = rotation;
-            }
-
-            //IF CAN REMOVE THE STONE AND GOES DOWN WITH THE PICKAXE --> Destroy the object.
-            GameObject childRemover = this.gameObject.transform.GetChild(0).gameObject;
-            if(childRemover.GetComponent<RemoverController>().CanRemove && players[tmp_pS -1].transform.position.y <= 1){
-                if(childRemover.GetComponent<RemoverController>().block != null){
-                    breakStoneAudio.PlayOneShot(breakStoneSound, 1.0f);
-                    if(childRemover.GetComponent<RemoverController>().block.transform.tag == "Obsidian"){
-                        WaterRiver.gameObject.GetComponent<WaterRiver>().GoToOriginalPos();
-                    }    
-                }          
-                Destroy(childRemover.GetComponent<RemoverController>().block);
-                PlatGen.transform.GetComponent<EmptyObjectGenerator>().FillPlatforms(childRemover.GetComponent<RemoverController>().block.GetComponent<PlatformController>().ID[0],childRemover.GetComponent<RemoverController>().block.GetComponent<PlatformController>().ID[1]);
             }
         }
     }

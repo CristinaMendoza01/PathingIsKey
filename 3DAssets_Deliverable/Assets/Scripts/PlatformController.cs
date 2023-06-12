@@ -146,10 +146,5 @@ public class PlatformController : MonoBehaviour
 
 //     public WaterRiver river; // Puedes asignar esto en el Inspector de Unity
 
-    void OnDestroy() {
-        if(this.transform.tag == "Obsidian") {
-            waterRiverObj.GetComponent<WaterRiver>().RiverFlow = true;
-        }   
-    }
 
 }

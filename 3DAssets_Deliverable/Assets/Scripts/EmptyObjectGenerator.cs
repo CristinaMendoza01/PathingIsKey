@@ -56,6 +56,9 @@ public class EmptyObjectGenerator : MonoBehaviour
                 if (!overlapWithEmpty)
                 {
                     GameObject newObj = Instantiate(Platform, position, Quaternion.identity);
+                    if(j == 8){
+                        newObj.GetComponent<PlatformController>().UpdatePlatform("Stone");
+                    }
                     newObj.GetComponent<PlatformController>().ID[0] = i;
                     newObj.GetComponent<PlatformController>().ID[1] = j;
                 }

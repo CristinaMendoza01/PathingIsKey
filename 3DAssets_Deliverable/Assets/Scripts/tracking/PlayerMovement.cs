@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public void setPosition(Vector3 pos)
     {
         float x = Mathf.Clamp(pos.x, tmppos.x - tmppos_offset.x, tmppos.x + tmppos_offset.x);
-        float y = Mathf.Clamp(pos.y, 0, 8);
+        float y = Mathf.Clamp(pos.y, 0, 3);
         float z = Mathf.Clamp(pos.z, tmppos.z - tmppos_offset.z, tmppos.z + tmppos_offset.z);
 
         transform.position = new Vector3(x, y, z);
