@@ -19,6 +19,7 @@ Cristina Mendoza
 - Sounds for the bucket picking water or the pickaxe breaking stone have also been added.
 
 # Mid Implementations
+
 - Ambiental Sound.
 - Make that when the ruby is picked up, it disappears.
 - Sound for the ruby when is picked up.
@@ -27,3 +28,17 @@ Cristina Mendoza
 - Created an advanced path to reach the stone (not optimal).
 - Increased the speed of the players for non-tracking (speed up the process).
 - Added new prefabs and a platform generator to create, destroy and regenerate the platforms
+
+# Advanced implementations
+
+- Addition of rivers with currents where if a block of obsidian is played the river is blocked and
+  if stone is placed then the block is carried away with the current.
+- Addition of obstacles such as trees and mountains where the players can't place a platform
+- Mechanic where the bucket can pick up lava or water placed on a platform
+- Fixed bug that duplicated platforms when one was destroyed
+- Updated lava audio
+- Addition of decoration such as flowers
+- Modification of ruby, added rotation and increased the scale
+- Instead of destroy objects we disable 'if (SetActive(false)) -> Disable them
+- Created a New función FillPlatforms
+- Added An id per platform to identify them
