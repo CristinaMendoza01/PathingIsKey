@@ -17,6 +17,9 @@ public class BucketController : MonoBehaviour
     
     private AudioSource fillWaterAudio;
     public AudioClip fillWaterSound;
+
+    private AudioSource fillLavaAudio;
+    public AudioClip fillLavaSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class BucketController : MonoBehaviour
         WaterBucket.SetActive(false);
         LavaBucket.SetActive(false);
         fillWaterAudio = GetComponent<AudioSource>();
+        fillLavaAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -60,6 +64,7 @@ public class BucketController : MonoBehaviour
             }
         }
         if(col.CompareTag("Lava")){
+            fillLavaAudio.PlayOneShot(fillLavaSound, 1.0f); 
             CanDropLava = true;
             LavaBucket.SetActive(true);
             if(CanDropWater){
